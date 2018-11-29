@@ -51,7 +51,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <!--<li><a runat="server" href="~/MyWork/Home">Home</a></li> -->
-                        <li><a runat="server" href="~/MyWork/Email">Messages</a></li>
+                        <li><%--<a runat="server" href="~/MyWork/Email">Messages</a>--%></li>
                         <li><a runat="server" href="~/Appointments/appointments_redirect">Appointments</a></li>
                         <li><a runat="server" href="~/PrescriptionsResults">Medical Records</a></li>
                     </ul>

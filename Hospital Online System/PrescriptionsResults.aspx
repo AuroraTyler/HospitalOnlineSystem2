@@ -1,9 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="PrescriptionsResults.aspx.cs" Inherits="Appointments_view_appointments" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="PrescriptionsResults.aspx.cs" Inherits="PrescriptionsResults" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
     <h2>Test Results</h2>
     <p>
-        <asp:GridView ID="TestGridview" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="UpcomingAppointmentsGridView_SelectedIndexChanged" DataKeyNames="TestId,DoctorId,PatientId" Width="361px">
+        <asp:GridView ID="TestGridview" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="TestId,DoctorId,PatientId" Width="361px">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:CommandField ShowSelectButton="True" />
@@ -26,7 +26,7 @@
         &nbsp;</p>
     <h2>Prescriptions</h2>
     <p>
-        <asp:GridView ID="PrescriptionsGridview" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="UpcomingAppointmentsGridView_SelectedIndexChanged" DataKeyNames="PrescriptionId,DoctorId,PatientId">
+        <asp:GridView ID="PrescriptionsGridview" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None"  DataKeyNames="PrescriptionId,DoctorId,PatientId">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:CommandField ShowSelectButton="True" />

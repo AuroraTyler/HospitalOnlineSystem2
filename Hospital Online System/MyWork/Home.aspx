@@ -11,15 +11,13 @@
     <p>
         &nbsp; View or Edit:&nbsp;&nbsp;
     </p>
+    <span style="font-size: medium">
     <ul>
-        <li class="text-left"><span style="font-size: medium">
-            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/MyWork/Email.aspx">Messages</asp:HyperLink>
-        </li>
         <li class="text-left"><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Appointments/appointments_redirect.aspx">Appointments</asp:HyperLink>
             </span></li>
         <li>
             <p class="text-left" style="font-size: medium">
-                <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/MyWork/UnderConstruction.aspx">Medical Records</asp:HyperLink>
+                <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/PrescriptionsResults.aspx">Medical Records</asp:HyperLink>
             </p>
         </li>
     </ul>
