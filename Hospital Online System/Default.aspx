@@ -12,13 +12,10 @@
             <h3>
                 Would you like to...</h3>
             <p>
-                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/MyWork/MessagesMain.aspx" style="font-size: large">View Messages</asp:HyperLink>
-            </p>
-            <p>
                 <asp:HyperLink ID="HyperLink2" runat="server" style="font-size: large">Make or Edit Appoinments</asp:HyperLink>
             </p>
             <p>
-                <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/MyWork/Under Construction.aspx" style="font-size: large">View Medical Records</asp:HyperLink>
+                <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/PrescriptionsResults.aspx" style="font-size: large">View Medical Records</asp:HyperLink>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </p>
             <p>
