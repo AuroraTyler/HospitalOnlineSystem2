@@ -8,7 +8,7 @@ using System.Data.Entity;
 
 public partial class Appointments_make_appointments : System.Web.UI.Page
 {
-    HOSEntities dbcon;
+    TGDBEntities dbcon;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -18,14 +18,14 @@ public partial class Appointments_make_appointments : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
-            dbcon = new HOSEntities();
+            dbcon = new TGDBEntities();
         }
     }
 
     protected void makeAppointmentButton_Click(object sender, EventArgs e)
     {
         int userID = 0;
-        HOSEntities dbconP = new HOSEntities();
+        TGDBEntities dbconP = new TGDBEntities();
         var patUser = (from x in dbconP.PatientTables
                        where x.PatientUserName == User.Identity.Name
                        select x).First();
@@ -36,7 +36,7 @@ public partial class Appointments_make_appointments : System.Web.UI.Page
         TimeSpan newAppTime = new TimeSpan(Convert.ToInt32(hourDropDownList.SelectedValue), Convert.ToInt32(minuteDropDownList.SelectedValue), 0);
         string newAppReason = reasonTextBox.Text;
         string newAppDoctorName = doctorDropDownList.SelectedItem.Value;
-        HOSEntities dbconD = new HOSEntities();
+        TGDBEntities dbconD = new TGDBEntities();
         var newAppDoc = (from x in dbconD.DoctorTables
                          where x.Name == newAppDoctorName
                          select x).First();
@@ -55,13 +55,13 @@ public partial class Appointments_make_appointments : System.Web.UI.Page
             //date and time is free for patient and doctor
 
 
-            HOSEntities dbconA = new HOSEntities();
+            TGDBEntities dbconA = new TGDBEntities();
             var existApp = (from x in dbconA.AppointmentTables
                             where x.AppointmentDate == newAppDate
                             select x).FirstOrDefault();
 
 
-            HOSEntities dbconA2 = new HOSEntities();
+            TGDBEntities dbconA2 = new TGDBEntities();
             var existAppDoc = (from x in dbconA2.AppointmentTables
                                where x.DoctorId == newAppDoctor
                                select x).FirstOrDefault();
@@ -96,7 +96,7 @@ public partial class Appointments_make_appointments : System.Web.UI.Page
                 newAppointment.PatientId = userID;
 
                 //add newAppointment to the Table
-                dbcon = new HOSEntities();
+                dbcon = new TGDBEntities();
                 dbcon.AppointmentTables.Add(newAppointment);
                 dbcon.SaveChanges();
 
@@ -120,7 +120,7 @@ public partial class Appointments_make_appointments : System.Web.UI.Page
     {
         int selectedHospital = Convert.ToInt32(hospitalDropDownList.SelectedItem.Value);
 
-        HOSEntities dbconH = new HOSEntities();
+        TGDBEntities dbconH = new TGDBEntities();
         dbconH.DepartmentTables.Load();
         var dept = from x in dbconH.DepartmentTables.Local
                    where x.HospitalId == selectedHospital
@@ -134,14 +134,14 @@ public partial class Appointments_make_appointments : System.Web.UI.Page
     {
         string selectedDepartment = departmentDropDownList.SelectedItem.Value;
 
-        HOSEntities dbconH = new HOSEntities();
+        TGDBEntities dbconH = new TGDBEntities();
         dbconH.DepartmentTables.Load();
 
         var deptId = (from x in dbconH.DepartmentTables
                      where x.Specialization == selectedDepartment
                      select x.DepartmentId).First();
 
-        HOSEntities dbconD = new HOSEntities();
+        TGDBEntities dbconD = new TGDBEntities();
         dbconD.DoctorTables.Load();
         var doc = from x in dbconD.DoctorTables.Local
                   where x.DepartmentId == deptId

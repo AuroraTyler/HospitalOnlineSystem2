@@ -21,14 +21,14 @@ public partial class MyWork_MessagesMain : System.Web.UI.Page
     {
         if (dbcon != null)
             dbcon.Dispose();
-        dbcon = new HOSEntities();
+        dbcon = new TGDBEntities();
         dbcon.EmailTables.Where(item => item.RecipientUserName.Trim().Equals(User.Identity.Name.Trim())).Load();
 
         //add data to the GridView
         GridView1.DataSource = dbcon.EmailTables.Local;
         GridView1.DataBind();
     }
-    HOSEntities dbcon;
+    TGDBEntities dbcon;
 
     public void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -60,7 +60,7 @@ public partial class MyWork_MessagesMain : System.Web.UI.Page
     {
         TextBox1.Visible = false;
         
-        dbcon = new HOSEntities();
+        dbcon = new TGDBEntities();
         dbcon.EmailTables.Load();
 
         int tape = (int)GridView1.SelectedDataKey[1];

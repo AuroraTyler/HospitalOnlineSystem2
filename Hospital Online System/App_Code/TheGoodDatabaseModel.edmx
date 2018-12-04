@@ -1,0 +1,812 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TGDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppointmentTable">
+          <Key>
+            <PropertyRef Name="AppointmentId" />
+          </Key>
+          <Property Name="AppointmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="AppointmentDate" Type="date" Nullable="false" />
+          <Property Name="AppointmentTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cause" Type="varchar(max)" />
+          <Property Name="Diagnosis" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="DepartmentTable">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HospitalId" Type="int" Nullable="false" />
+          <Property Name="Specialization" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DepartmentEmail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DepartmentPhone" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DoctorTable">
+          <Key>
+            <PropertyRef Name="DoctorId" />
+          </Key>
+          <Property Name="DoctorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HospitalID" Type="int" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoctorUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoctorPassword" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateofBirth" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmailTable">
+          <Key>
+            <PropertyRef Name="EmailId" />
+          </Key>
+          <Property Name="EmailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmailText" Type="varchar(max)" Nullable="false" />
+          <Property Name="SenderUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RecipientUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HospitalTable">
+          <Key>
+            <PropertyRef Name="HospitalId" />
+          </Key>
+          <Property Name="HospitalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactEmail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactPhone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientTable">
+          <Key>
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Name="PatientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="PatientUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PatientPassword" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateofBirth" Type="date" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrescriptionTable">
+          <Key>
+            <PropertyRef Name="PresriptionID" />
+          </Key>
+          <Property Name="PresriptionID" Type="int" Nullable="false" />
+          <Property Name="PatientID" Type="int" Nullable="false" />
+          <Property Name="DoctorID" Type="int" Nullable="false" />
+          <Property Name="AppointmentID" Type="int" Nullable="false" />
+          <Property Name="TestID" Type="int" />
+          <Property Name="MedicationName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Dosage" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RenewalDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestTable">
+          <Key>
+            <PropertyRef Name="TestID" />
+          </Key>
+          <Property Name="TestID" Type="int" Nullable="false" />
+          <Property Name="AppointmentID" Type="int" Nullable="false" />
+          <Property Name="PatientID" Type="int" Nullable="false" />
+          <Property Name="DoctorID" Type="int" Nullable="false" />
+          <Property Name="TestDate" Type="date" Nullable="false" />
+          <Property Name="TestTime" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Conclusion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AppointmentID">
+          <End Role="AppointmentTable" Type="Self.AppointmentTable" Multiplicity="1" />
+          <End Role="PrescriptionTable" Type="Self.PrescriptionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppointmentTable">
+              <PropertyRef Name="AppointmentId" />
+            </Principal>
+            <Dependent Role="PrescriptionTable">
+              <PropertyRef Name="AppointmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentID2">
+          <End Role="AppointmentTable" Type="Self.AppointmentTable" Multiplicity="1" />
+          <End Role="TestTable" Type="Self.TestTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppointmentTable">
+              <PropertyRef Name="AppointmentId" />
+            </Principal>
+            <Dependent Role="TestTable">
+              <PropertyRef Name="AppointmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentId">
+          <End Role="DepartmentTable" Type="Self.DepartmentTable" Multiplicity="1" />
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepartmentTable">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="DoctorTable">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorId">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="1" />
+          <End Role="PatientTable" Type="Self.PatientTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="PatientTable">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorId2">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="1" />
+          <End Role="AppointmentTable" Type="Self.AppointmentTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="AppointmentTable">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorId3">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="1" />
+          <End Role="PrescriptionTable" Type="Self.PrescriptionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="PrescriptionTable">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorId4">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="1" />
+          <End Role="TestTable" Type="Self.TestTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="TestTable">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HospitalId">
+          <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="1" />
+          <End Role="DepartmentTable" Type="Self.DepartmentTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalTable">
+              <PropertyRef Name="HospitalId" />
+            </Principal>
+            <Dependent Role="DepartmentTable">
+              <PropertyRef Name="HospitalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HospitalId2">
+          <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="1" />
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalTable">
+              <PropertyRef Name="HospitalId" />
+            </Principal>
+            <Dependent Role="DoctorTable">
+              <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientId">
+          <End Role="PatientTable" Type="Self.PatientTable" Multiplicity="1" />
+          <End Role="AppointmentTable" Type="Self.AppointmentTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientTable">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="AppointmentTable">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientID2">
+          <End Role="PatientTable" Type="Self.PatientTable" Multiplicity="1" />
+          <End Role="PrescriptionTable" Type="Self.PrescriptionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientTable">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="PrescriptionTable">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientID3">
+          <End Role="PatientTable" Type="Self.PatientTable" Multiplicity="1" />
+          <End Role="TestTable" Type="Self.TestTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientTable">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="TestTable">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestID">
+          <End Role="TestTable" Type="Self.TestTable" Multiplicity="0..1" />
+          <End Role="PrescriptionTable" Type="Self.PrescriptionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestTable">
+              <PropertyRef Name="TestID" />
+            </Principal>
+            <Dependent Role="PrescriptionTable">
+              <PropertyRef Name="TestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TGDBModelStoreContainer">
+          <EntitySet Name="AppointmentTable" EntityType="Self.AppointmentTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepartmentTable" EntityType="Self.DepartmentTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorTable" EntityType="Self.DoctorTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmailTable" EntityType="Self.EmailTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HospitalTable" EntityType="Self.HospitalTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientTable" EntityType="Self.PatientTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrescriptionTable" EntityType="Self.PrescriptionTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestTable" EntityType="Self.TestTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AppointmentID" Association="Self.FK_AppointmentID">
+            <End Role="AppointmentTable" EntitySet="AppointmentTable" />
+            <End Role="PrescriptionTable" EntitySet="PrescriptionTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentID2" Association="Self.FK_AppointmentID2">
+            <End Role="AppointmentTable" EntitySet="AppointmentTable" />
+            <End Role="TestTable" EntitySet="TestTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentId" Association="Self.FK_DepartmentId">
+            <End Role="DepartmentTable" EntitySet="DepartmentTable" />
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorId" Association="Self.FK_DoctorId">
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+            <End Role="PatientTable" EntitySet="PatientTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorId2" Association="Self.FK_DoctorId2">
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+            <End Role="AppointmentTable" EntitySet="AppointmentTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorId3" Association="Self.FK_DoctorId3">
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+            <End Role="PrescriptionTable" EntitySet="PrescriptionTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorId4" Association="Self.FK_DoctorId4">
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+            <End Role="TestTable" EntitySet="TestTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HospitalId" Association="Self.FK_HospitalId">
+            <End Role="HospitalTable" EntitySet="HospitalTable" />
+            <End Role="DepartmentTable" EntitySet="DepartmentTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HospitalId2" Association="Self.FK_HospitalId2">
+            <End Role="HospitalTable" EntitySet="HospitalTable" />
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientId" Association="Self.FK_PatientId">
+            <End Role="PatientTable" EntitySet="PatientTable" />
+            <End Role="AppointmentTable" EntitySet="AppointmentTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientID2" Association="Self.FK_PatientID2">
+            <End Role="PatientTable" EntitySet="PatientTable" />
+            <End Role="PrescriptionTable" EntitySet="PrescriptionTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientID3" Association="Self.FK_PatientID3">
+            <End Role="PatientTable" EntitySet="PatientTable" />
+            <End Role="TestTable" EntitySet="TestTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestID" Association="Self.FK_TestID">
+            <End Role="TestTable" EntitySet="TestTable" />
+            <End Role="PrescriptionTable" EntitySet="PrescriptionTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TGDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AppointmentTable">
+          <Key>
+            <PropertyRef Name="AppointmentId" />
+          </Key>
+          <Property Name="AppointmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="AppointmentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AppointmentTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cause" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Diagnosis" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PrescriptionTables" Relationship="Self.FK_AppointmentID" FromRole="AppointmentTable" ToRole="PrescriptionTable" />
+          <NavigationProperty Name="TestTables" Relationship="Self.FK_AppointmentID2" FromRole="AppointmentTable" ToRole="TestTable" />
+          <NavigationProperty Name="DoctorTable" Relationship="Self.FK_DoctorId2" FromRole="AppointmentTable" ToRole="DoctorTable" />
+          <NavigationProperty Name="PatientTable" Relationship="Self.FK_PatientId" FromRole="AppointmentTable" ToRole="PatientTable" />
+        </EntityType>
+        <EntityType Name="DepartmentTable">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HospitalId" Type="Int32" Nullable="false" />
+          <Property Name="Specialization" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DepartmentEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DepartmentPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DoctorTables" Relationship="Self.FK_DepartmentId" FromRole="DepartmentTable" ToRole="DoctorTable" />
+          <NavigationProperty Name="HospitalTable" Relationship="Self.FK_HospitalId" FromRole="DepartmentTable" ToRole="HospitalTable" />
+        </EntityType>
+        <EntityType Name="DoctorTable">
+          <Key>
+            <PropertyRef Name="DoctorId" />
+          </Key>
+          <Property Name="DoctorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HospitalID" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DoctorUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DoctorPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateofBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="AppointmentTables" Relationship="Self.FK_DoctorId2" FromRole="DoctorTable" ToRole="AppointmentTable" />
+          <NavigationProperty Name="DepartmentTable" Relationship="Self.FK_DepartmentId" FromRole="DoctorTable" ToRole="DepartmentTable" />
+          <NavigationProperty Name="PatientTables" Relationship="Self.FK_DoctorId" FromRole="DoctorTable" ToRole="PatientTable" />
+          <NavigationProperty Name="PrescriptionTables" Relationship="Self.FK_DoctorId3" FromRole="DoctorTable" ToRole="PrescriptionTable" />
+          <NavigationProperty Name="TestTables" Relationship="Self.FK_DoctorId4" FromRole="DoctorTable" ToRole="TestTable" />
+          <NavigationProperty Name="HospitalTable" Relationship="Self.FK_HospitalId2" FromRole="DoctorTable" ToRole="HospitalTable" />
+        </EntityType>
+        <EntityType Name="EmailTable">
+          <Key>
+            <PropertyRef Name="EmailId" />
+          </Key>
+          <Property Name="EmailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SenderUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RecipientUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="HospitalTable">
+          <Key>
+            <PropertyRef Name="HospitalId" />
+          </Key>
+          <Property Name="HospitalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContactPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DepartmentTables" Relationship="Self.FK_HospitalId" FromRole="HospitalTable" ToRole="DepartmentTable" />
+          <NavigationProperty Name="DoctorTables" Relationship="Self.FK_HospitalId2" FromRole="HospitalTable" ToRole="DoctorTable" />
+        </EntityType>
+        <EntityType Name="PatientTable">
+          <Key>
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Name="PatientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="PatientUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PatientPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateofBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AppointmentTables" Relationship="Self.FK_PatientId" FromRole="PatientTable" ToRole="AppointmentTable" />
+          <NavigationProperty Name="DoctorTable" Relationship="Self.FK_DoctorId" FromRole="PatientTable" ToRole="DoctorTable" />
+          <NavigationProperty Name="PrescriptionTables" Relationship="Self.FK_PatientID2" FromRole="PatientTable" ToRole="PrescriptionTable" />
+          <NavigationProperty Name="TestTables" Relationship="Self.FK_PatientID3" FromRole="PatientTable" ToRole="TestTable" />
+        </EntityType>
+        <EntityType Name="PrescriptionTable">
+          <Key>
+            <PropertyRef Name="PresriptionID" />
+          </Key>
+          <Property Name="PresriptionID" Type="Int32" Nullable="false" />
+          <Property Name="PatientID" Type="Int32" Nullable="false" />
+          <Property Name="DoctorID" Type="Int32" Nullable="false" />
+          <Property Name="AppointmentID" Type="Int32" Nullable="false" />
+          <Property Name="TestID" Type="Int32" />
+          <Property Name="MedicationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dosage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RenewalDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="AppointmentTable" Relationship="Self.FK_AppointmentID" FromRole="PrescriptionTable" ToRole="AppointmentTable" />
+          <NavigationProperty Name="DoctorTable" Relationship="Self.FK_DoctorId3" FromRole="PrescriptionTable" ToRole="DoctorTable" />
+          <NavigationProperty Name="PatientTable" Relationship="Self.FK_PatientID2" FromRole="PrescriptionTable" ToRole="PatientTable" />
+          <NavigationProperty Name="TestTable" Relationship="Self.FK_TestID" FromRole="PrescriptionTable" ToRole="TestTable" />
+        </EntityType>
+        <EntityType Name="TestTable">
+          <Key>
+            <PropertyRef Name="TestID" />
+          </Key>
+          <Property Name="TestID" Type="Int32" Nullable="false" />
+          <Property Name="AppointmentID" Type="Int32" Nullable="false" />
+          <Property Name="PatientID" Type="Int32" Nullable="false" />
+          <Property Name="DoctorID" Type="Int32" Nullable="false" />
+          <Property Name="TestDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TestTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Conclusion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AppointmentTable" Relationship="Self.FK_AppointmentID2" FromRole="TestTable" ToRole="AppointmentTable" />
+          <NavigationProperty Name="DoctorTable" Relationship="Self.FK_DoctorId4" FromRole="TestTable" ToRole="DoctorTable" />
+          <NavigationProperty Name="PatientTable" Relationship="Self.FK_PatientID3" FromRole="TestTable" ToRole="PatientTable" />
+          <NavigationProperty Name="PrescriptionTables" Relationship="Self.FK_TestID" FromRole="TestTable" ToRole="PrescriptionTable" />
+        </EntityType>
+        <Association Name="FK_AppointmentID">
+          <End Role="AppointmentTable" Type="Self.AppointmentTable" Multiplicity="1" />
+          <End Role="PrescriptionTable" Type="Self.PrescriptionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppointmentTable">
+              <PropertyRef Name="AppointmentId" />
+            </Principal>
+            <Dependent Role="PrescriptionTable">
+              <PropertyRef Name="AppointmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentID2">
+          <End Role="AppointmentTable" Type="Self.AppointmentTable" Multiplicity="1" />
+          <End Role="TestTable" Type="Self.TestTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppointmentTable">
+              <PropertyRef Name="AppointmentId" />
+            </Principal>
+            <Dependent Role="TestTable">
+              <PropertyRef Name="AppointmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorId2">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="1" />
+          <End Role="AppointmentTable" Type="Self.AppointmentTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="AppointmentTable">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientId">
+          <End Role="PatientTable" Type="Self.PatientTable" Multiplicity="1" />
+          <End Role="AppointmentTable" Type="Self.AppointmentTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientTable">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="AppointmentTable">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentId">
+          <End Role="DepartmentTable" Type="Self.DepartmentTable" Multiplicity="1" />
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepartmentTable">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="DoctorTable">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HospitalId">
+          <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="1" />
+          <End Role="DepartmentTable" Type="Self.DepartmentTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalTable">
+              <PropertyRef Name="HospitalId" />
+            </Principal>
+            <Dependent Role="DepartmentTable">
+              <PropertyRef Name="HospitalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorId">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="1" />
+          <End Role="PatientTable" Type="Self.PatientTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="PatientTable">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorId3">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="1" />
+          <End Role="PrescriptionTable" Type="Self.PrescriptionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="PrescriptionTable">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorId4">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="1" />
+          <End Role="TestTable" Type="Self.TestTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="TestTable">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HospitalId2">
+          <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="1" />
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalTable">
+              <PropertyRef Name="HospitalId" />
+            </Principal>
+            <Dependent Role="DoctorTable">
+              <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientID2">
+          <End Role="PatientTable" Type="Self.PatientTable" Multiplicity="1" />
+          <End Role="PrescriptionTable" Type="Self.PrescriptionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientTable">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="PrescriptionTable">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientID3">
+          <End Role="PatientTable" Type="Self.PatientTable" Multiplicity="1" />
+          <End Role="TestTable" Type="Self.TestTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientTable">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="TestTable">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestID">
+          <End Role="TestTable" Type="Self.TestTable" Multiplicity="0..1" />
+          <End Role="PrescriptionTable" Type="Self.PrescriptionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestTable">
+              <PropertyRef Name="TestID" />
+            </Principal>
+            <Dependent Role="PrescriptionTable">
+              <PropertyRef Name="TestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TGDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppointmentTables" EntityType="Self.AppointmentTable" />
+          <EntitySet Name="DepartmentTables" EntityType="Self.DepartmentTable" />
+          <EntitySet Name="DoctorTables" EntityType="Self.DoctorTable" />
+          <EntitySet Name="EmailTables" EntityType="Self.EmailTable" />
+          <EntitySet Name="HospitalTables" EntityType="Self.HospitalTable" />
+          <EntitySet Name="PatientTables" EntityType="Self.PatientTable" />
+          <EntitySet Name="PrescriptionTables" EntityType="Self.PrescriptionTable" />
+          <EntitySet Name="TestTables" EntityType="Self.TestTable" />
+          <AssociationSet Name="FK_AppointmentID" Association="Self.FK_AppointmentID">
+            <End Role="AppointmentTable" EntitySet="AppointmentTables" />
+            <End Role="PrescriptionTable" EntitySet="PrescriptionTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentID2" Association="Self.FK_AppointmentID2">
+            <End Role="AppointmentTable" EntitySet="AppointmentTables" />
+            <End Role="TestTable" EntitySet="TestTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorId2" Association="Self.FK_DoctorId2">
+            <End Role="DoctorTable" EntitySet="DoctorTables" />
+            <End Role="AppointmentTable" EntitySet="AppointmentTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientId" Association="Self.FK_PatientId">
+            <End Role="PatientTable" EntitySet="PatientTables" />
+            <End Role="AppointmentTable" EntitySet="AppointmentTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentId" Association="Self.FK_DepartmentId">
+            <End Role="DepartmentTable" EntitySet="DepartmentTables" />
+            <End Role="DoctorTable" EntitySet="DoctorTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HospitalId" Association="Self.FK_HospitalId">
+            <End Role="HospitalTable" EntitySet="HospitalTables" />
+            <End Role="DepartmentTable" EntitySet="DepartmentTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorId" Association="Self.FK_DoctorId">
+            <End Role="DoctorTable" EntitySet="DoctorTables" />
+            <End Role="PatientTable" EntitySet="PatientTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorId3" Association="Self.FK_DoctorId3">
+            <End Role="DoctorTable" EntitySet="DoctorTables" />
+            <End Role="PrescriptionTable" EntitySet="PrescriptionTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorId4" Association="Self.FK_DoctorId4">
+            <End Role="DoctorTable" EntitySet="DoctorTables" />
+            <End Role="TestTable" EntitySet="TestTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HospitalId2" Association="Self.FK_HospitalId2">
+            <End Role="HospitalTable" EntitySet="HospitalTables" />
+            <End Role="DoctorTable" EntitySet="DoctorTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientID2" Association="Self.FK_PatientID2">
+            <End Role="PatientTable" EntitySet="PatientTables" />
+            <End Role="PrescriptionTable" EntitySet="PrescriptionTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientID3" Association="Self.FK_PatientID3">
+            <End Role="PatientTable" EntitySet="PatientTables" />
+            <End Role="TestTable" EntitySet="TestTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestID" Association="Self.FK_TestID">
+            <End Role="TestTable" EntitySet="TestTables" />
+            <End Role="PrescriptionTable" EntitySet="PrescriptionTables" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TGDBModelStoreContainer" CdmEntityContainer="TGDBEntities">
+          <EntitySetMapping Name="AppointmentTables">
+            <EntityTypeMapping TypeName="TGDBModel.AppointmentTable">
+              <MappingFragment StoreEntitySet="AppointmentTable">
+                <ScalarProperty Name="AppointmentId" ColumnName="AppointmentId" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+                <ScalarProperty Name="AppointmentTime" ColumnName="AppointmentTime" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Cause" ColumnName="Cause" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepartmentTables">
+            <EntityTypeMapping TypeName="TGDBModel.DepartmentTable">
+              <MappingFragment StoreEntitySet="DepartmentTable">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
+                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+                <ScalarProperty Name="DepartmentEmail" ColumnName="DepartmentEmail" />
+                <ScalarProperty Name="DepartmentPhone" ColumnName="DepartmentPhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorTables">
+            <EntityTypeMapping TypeName="TGDBModel.DoctorTable">
+              <MappingFragment StoreEntitySet="DoctorTable">
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DoctorUserName" ColumnName="DoctorUserName" />
+                <ScalarProperty Name="DoctorPassword" ColumnName="DoctorPassword" />
+                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmailTables">
+            <EntityTypeMapping TypeName="TGDBModel.EmailTable">
+              <MappingFragment StoreEntitySet="EmailTable">
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="EmailText" ColumnName="EmailText" />
+                <ScalarProperty Name="SenderUserName" ColumnName="SenderUserName" />
+                <ScalarProperty Name="RecipientUserName" ColumnName="RecipientUserName" />
+                <ScalarProperty Name="EmailDate" ColumnName="EmailDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HospitalTables">
+            <EntityTypeMapping TypeName="TGDBModel.HospitalTable">
+              <MappingFragment StoreEntitySet="HospitalTable">
+                <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientTables">
+            <EntityTypeMapping TypeName="TGDBModel.PatientTable">
+              <MappingFragment StoreEntitySet="PatientTable">
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="PatientUserName" ColumnName="PatientUserName" />
+                <ScalarProperty Name="PatientPassword" ColumnName="PatientPassword" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrescriptionTables">
+            <EntityTypeMapping TypeName="TGDBModel.PrescriptionTable">
+              <MappingFragment StoreEntitySet="PrescriptionTable">
+                <ScalarProperty Name="PresriptionID" ColumnName="PresriptionID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
+                <ScalarProperty Name="TestID" ColumnName="TestID" />
+                <ScalarProperty Name="MedicationName" ColumnName="MedicationName" />
+                <ScalarProperty Name="Dosage" ColumnName="Dosage" />
+                <ScalarProperty Name="RenewalDate" ColumnName="RenewalDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestTables">
+            <EntityTypeMapping TypeName="TGDBModel.TestTable">
+              <MappingFragment StoreEntitySet="TestTable">
+                <ScalarProperty Name="TestID" ColumnName="TestID" />
+                <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="TestDate" ColumnName="TestDate" />
+                <ScalarProperty Name="TestTime" ColumnName="TestTime" />
+                <ScalarProperty Name="Conclusion" ColumnName="Conclusion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

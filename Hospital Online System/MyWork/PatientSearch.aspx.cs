@@ -8,7 +8,7 @@ using System.Media;
 
 public partial class MyWork_PatientSearch : System.Web.UI.Page
 {
-    HOSEntities dbcon = new HOSEntities();
+    TGDBEntities dbcon = new TGDBEntities();
 
     protected void Page_Load(object sender, EventArgs e)
     {
