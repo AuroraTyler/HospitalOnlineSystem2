@@ -9,7 +9,7 @@ using System.Data.Entity;
 public partial class PrescriptionsResults : System.Web.UI.Page
 {
 
-    HOSEntities dbcon = new HOSEntities();
+    TGDBEntities dbcon = new TGDBEntities();
     int userID = 0;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -19,48 +19,49 @@ public partial class PrescriptionsResults : System.Web.UI.Page
             Response.Redirect("~/MyWork/Home.aspx");
         }
 
-        //RefreshTestGridview();
-        //RefreshGridView(PrescriptionsGridview);
+        RefreshTestGridView();
+        RefreshPrescriptionGridView();
 
     }
 
-    //protected void RefreshTestGridView()
-    //{
-    //    if (dbcon != null)
-    //        dbcon.Dispose();
+    protected void RefreshTestGridView()
+    {
+        if (dbcon != null)
+            dbcon.Dispose();
 
-    //    HOSEntities dbconD = new HOSEntities();
+        TGDBEntities dbconD = new TGDBEntities();
 
-    //    var docUser = (from x in dbconD.PatientTables
-    //                   where x.PatientUserName == User.Identity.Name
-    //                   select x).First();
+        var docUser = (from x in dbconD.PatientTables
+                       where x.PatientUserName == User.Identity.Name
+                       select x).First();
 
-    //    userID = docUser.PatientId;
+        userID = docUser.PatientId;
 
-    //    HOSEntities dbconA = new HOSEntities();
-    //    dbconA.TestTables.Where(item => item.PatientId.Equals(userID)).Load();
+        TGDBEntities dbconA = new TGDBEntities();
+        dbconA.TestTables.Where(item => item.PatientID.Equals(userID)).Load();
 
-    //    TestGridview.DataSource = dbconA.AppointmentTables.Local;
-    //    TestGridview.DataBind();
+        TestGridview.DataSource = dbconA.TestTables.Local;
+        TestGridview.DataBind();
+    }
+
+    protected void RefreshPrescriptionGridView()
+    {
+        if (dbcon != null)
+            dbcon.Dispose();
+
+        TGDBEntities dbconZ = new TGDBEntities();
+
+        var docUser = (from x in dbconZ.PatientTables
+                       where x.PatientUserName == User.Identity.Name
+                       select x).First();
+
+        userID = docUser.PatientId;
+
+        TGDBEntities dbconY = new TGDBEntities();
+        dbconY.PrescriptionTables.Where(item => item.PatientID.Equals(userID)).Load();
+
+        PrescriptionsGridview.DataSource = dbconY.PrescriptionTables.Local;
+        PrescriptionsGridview.DataBind();
+    }
 }
-
-    //protected void RefreshPrescriptionGridView()
-    //{
-    //    if (dbcon != null)
-    //        dbcon.Dispose();
-
-    //    HOSEntities dbconZ = new HOSEntities();
-
-    //    var docUser = (from x in dbconZ.PatientTables
-    //                   where x.PatientUserName == User.Identity.Name
-    //                   select x).First();
-
-    //    userID = docUser.PatientId;
-
-    //    HOSEntities dbconA = new HOSEntities();
-    //    dbconA.PrescriptionTables.Where(item => item.PatientId.Equals(userID)).Load();
-
-    //    PrescriptionGridview.DataSource = dbconA.AppointmentTables.Local;
-    //    PrescriptionGridview.DataBind();
-    //}
 

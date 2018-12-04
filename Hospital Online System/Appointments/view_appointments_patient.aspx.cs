@@ -8,7 +8,7 @@ using System.Data.Entity;
 
 public partial class Appointments_view_appointments : System.Web.UI.Page
 {
-    HOSEntities dbcon = new HOSEntities();
+    TGDBEntities dbcon = new TGDBEntities();
     int userID = 0;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -20,7 +20,7 @@ public partial class Appointments_view_appointments : System.Web.UI.Page
 
         
 
-        HOSEntities dbconP = new HOSEntities();
+        TGDBEntities dbconP = new TGDBEntities();
 
         var patUser = (from x in dbconP.PatientTables
                        where x.PatientUserName == User.Identity.Name
@@ -36,7 +36,7 @@ public partial class Appointments_view_appointments : System.Web.UI.Page
             dbcon.Dispose();
         
 
-        dbcon = new HOSEntities();
+        dbcon = new TGDBEntities();
         dbcon.AppointmentTables.Where(item => item.PatientId.Equals(userID)).Load();
 
         UpcomingAppointmentsGridView.DataSource = dbcon.AppointmentTables.Local;
@@ -45,8 +45,8 @@ public partial class Appointments_view_appointments : System.Web.UI.Page
 
     protected void UpcomingAppointmentsGridView_SelectedIndexChanged(object sender, EventArgs e)
     {
-        HOSEntities dbconA = new HOSEntities();
-        HOSEntities dbconD = new HOSEntities();
+        TGDBEntities dbconA = new TGDBEntities();
+        TGDBEntities dbconD = new TGDBEntities();
 
         int selectedAppointment = (int)UpcomingAppointmentsGridView.SelectedDataKey[0];
 
@@ -68,7 +68,7 @@ public partial class Appointments_view_appointments : System.Web.UI.Page
 
     protected void deleteAppointmentButton_Click(object sender, EventArgs e)
     {
-        dbcon = new HOSEntities();
+        dbcon = new TGDBEntities();
         dbcon.AppointmentTables.Load();
         int selectedAppointment = (int)UpcomingAppointmentsGridView.SelectedDataKey[0];
 

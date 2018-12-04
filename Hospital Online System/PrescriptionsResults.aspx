@@ -6,10 +6,9 @@
         <asp:GridView ID="TestGridview" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="TestId,DoctorId,PatientId" Width="361px">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:CommandField ShowSelectButton="True" />
-                <asp:BoundField DataField="AppointmentDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Test Date" />
-                <asp:BoundField DataField="AppointmentTime" HeaderText="Test Time" />
-                <asp:BoundField DataField="Description" HeaderText="Conclusion" />
+                <asp:BoundField DataField="TestDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Test Date" />
+                <asp:BoundField DataField="TestTime" HeaderText="Test Time" />
+                <asp:BoundField DataField="Conclusion" HeaderText="Conclusion" />
             </Columns>
             <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
             <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
@@ -26,13 +25,12 @@
         &nbsp;</p>
     <h2>Prescriptions</h2>
     <p>
-        <asp:GridView ID="PrescriptionsGridview" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None"  DataKeyNames="PrescriptionId,DoctorId,PatientId">
+        <asp:GridView ID="PrescriptionsGridview" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None"  DataKeyNames="PresriptionId,DoctorId,PatientId">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:CommandField ShowSelectButton="True" />
-                <asp:BoundField DataField="AppointmentDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Medication Name" />
-                <asp:BoundField DataField="AppointmentTime" HeaderText="Dosage" />
-                <asp:BoundField DataField="Description" HeaderText="Renewal Date" />
+                <asp:BoundField DataField="MedicationName" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Medication Name" />
+                <asp:BoundField DataField="Dosage" HeaderText="Dosage" />
+                <asp:BoundField DataField="RenewalDate" HeaderText="Renewal Date" DataFormatString="{0:d}" />
             </Columns>
             <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
             <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />

@@ -11,10 +11,10 @@ using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 
-public partial class HOSEntities : DbContext
+public partial class TGDBEntities : DbContext
 {
-    public HOSEntities()
-        : base("name=HOSEntities")
+    public TGDBEntities()
+        : base("name=TGDBEntities")
     {
     }
 
@@ -29,4 +29,6 @@ public partial class HOSEntities : DbContext
     public virtual DbSet<EmailTable> EmailTables { get; set; }
     public virtual DbSet<HospitalTable> HospitalTables { get; set; }
     public virtual DbSet<PatientTable> PatientTables { get; set; }
+    public virtual DbSet<PrescriptionTable> PrescriptionTables { get; set; }
+    public virtual DbSet<TestTable> TestTables { get; set; }
 }

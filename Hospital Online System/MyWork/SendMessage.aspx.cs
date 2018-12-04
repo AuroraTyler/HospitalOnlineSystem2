@@ -36,7 +36,7 @@ public partial class MyWork_SendMessage : System.Web.UI.Page
 
 
     }
-        HOSEntities dbcon = new HOSEntities();
+        TGDBEntities dbcon = new TGDBEntities();
 
     protected void Button1_Click(object sender, EventArgs e)
     {

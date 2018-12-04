@@ -8,7 +8,7 @@ using System.Data.Entity;
 
 public partial class Appointments_view_appointments : System.Web.UI.Page
 {
-    HOSEntities dbcon = new HOSEntities();
+    TGDBEntities dbcon = new TGDBEntities();
     int userID = 0;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -26,7 +26,7 @@ public partial class Appointments_view_appointments : System.Web.UI.Page
     {
         if (dbcon != null)
             dbcon.Dispose();
-        HOSEntities dbconP = new HOSEntities();
+        TGDBEntities dbconP = new TGDBEntities();
 
         var patUser = (from x in dbconP.PatientTables
                        where x.PatientUserName == User.Identity.Name
@@ -34,7 +34,7 @@ public partial class Appointments_view_appointments : System.Web.UI.Page
 
         userID = patUser.PatientId;
 
-        HOSEntities dbconA = new HOSEntities();
+        TGDBEntities dbconA = new TGDBEntities();
         dbconA.AppointmentTables.Where(item => item.PatientId.Equals(userID)).Load();
 
         UpcomingAppointmentsGridView.DataSource = dbconA.AppointmentTables.Local;
@@ -43,10 +43,10 @@ public partial class Appointments_view_appointments : System.Web.UI.Page
 
     protected void UpcomingAppointmentsGridView_SelectedIndexChanged(object sender, EventArgs e)
     {
-        HOSEntities dbconA = new HOSEntities();
-        HOSEntities dbconD = new HOSEntities();
-        HOSEntities dbconH = new HOSEntities();
-        HOSEntities dbconS = new HOSEntities();
+        TGDBEntities dbconA = new TGDBEntities();
+        TGDBEntities dbconD = new TGDBEntities();
+        TGDBEntities dbconH = new TGDBEntities();
+        TGDBEntities dbconS = new TGDBEntities();
 
         int selectedAppointment = (int)UpcomingAppointmentsGridView.SelectedDataKey[0];
 
@@ -78,7 +78,7 @@ public partial class Appointments_view_appointments : System.Web.UI.Page
     {
         int selectedHospital = Convert.ToInt32(hospitalDropDownList.SelectedItem.Value);
 
-        HOSEntities dbconH = new HOSEntities();
+        TGDBEntities dbconH = new TGDBEntities();
         dbconH.DepartmentTables.Load();
         var dept = from x in dbconH.DepartmentTables.Local
                    where x.HospitalId == selectedHospital
@@ -92,14 +92,14 @@ public partial class Appointments_view_appointments : System.Web.UI.Page
     {
         string selectedDepartment = departmentDropDownList.SelectedItem.Value;
 
-        HOSEntities dbconH = new HOSEntities();
+        TGDBEntities dbconH = new TGDBEntities();
         dbconH.DepartmentTables.Load();
 
         var deptId = (from x in dbconH.DepartmentTables
                       where x.Specialization == selectedDepartment
                       select x.DepartmentId).First();
 
-        HOSEntities dbconD = new HOSEntities();
+        TGDBEntities dbconD = new TGDBEntities();
         dbconD.DoctorTables.Load();
         var doc = from x in dbconD.DoctorTables.Local
                   where x.DepartmentId == deptId
@@ -112,10 +112,10 @@ public partial class Appointments_view_appointments : System.Web.UI.Page
     protected void updateAppointmentButton_Click(object sender, EventArgs e)
     {
         //current Appointment information
-        HOSEntities dbconA = new HOSEntities();
-        HOSEntities dbconD = new HOSEntities();
-        HOSEntities dbconH = new HOSEntities();
-        HOSEntities dbconS = new HOSEntities();
+        TGDBEntities dbconA = new TGDBEntities();
+        TGDBEntities dbconD = new TGDBEntities();
+        TGDBEntities dbconH = new TGDBEntities();
+        TGDBEntities dbconS = new TGDBEntities();
 
         int selectedAppointment = (int)UpcomingAppointmentsGridView.SelectedDataKey[0];
 
@@ -164,7 +164,7 @@ public partial class Appointments_view_appointments : System.Web.UI.Page
         if(!(doctorDropDownList.SelectedItem.Value.Equals(currentAppDocName)))
         {
             editAppDoctorName = doctorDropDownList.SelectedItem.Value;
-            HOSEntities dbconD2 = new HOSEntities();
+            TGDBEntities dbconD2 = new TGDBEntities();
             var editAppDoc = (from x in dbconD2.DoctorTables
                               where x.Name == editAppDoctorName
                               select x).First();
@@ -184,13 +184,13 @@ public partial class Appointments_view_appointments : System.Web.UI.Page
             //date and time is free for patient and doctor
 
 
-            HOSEntities dbconA2 = new HOSEntities();
+            TGDBEntities dbconA2 = new TGDBEntities();
             var existApp = (from x in dbconA2.AppointmentTables
                             where x.AppointmentDate == editAppDate
                             select x).FirstOrDefault();
 
 
-            HOSEntities dbconA3 = new HOSEntities();
+            TGDBEntities dbconA3 = new TGDBEntities();
             var existAppDoc = (from x in dbconA3.AppointmentTables
                                where x.DoctorId == editAppDoctor
                                select x).FirstOrDefault();
@@ -216,7 +216,7 @@ public partial class Appointments_view_appointments : System.Web.UI.Page
             else //input is valid, update appointment
             {
                 //selected appointment is apt, update all fields to ensure the record is valid and accurate
-                dbcon = new HOSEntities();
+                dbcon = new TGDBEntities();
                 var updatedApt = (from x in dbcon.AppointmentTables
                            where x.AppointmentId == selectedAppointment
                            select x).First();

@@ -18,7 +18,7 @@ public partial class MyWork_SentMessages : System.Web.UI.Page
 
     }
 
-    HOSEntities dbcon = new HOSEntities();
+    TGDBEntities dbcon = new TGDBEntities();
 
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
